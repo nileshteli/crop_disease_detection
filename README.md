@@ -3,7 +3,7 @@
 A simple and interactive **web-based demo** that simulates crop disease detection using plant leaf images.  
 This project allows users to upload a leaf image and get a simulated disease prediction result, confidence score, and suggested treatment steps.
 
----
+
 
 ## 🌐 Live Demo
 
@@ -11,7 +11,7 @@ This project allows users to upload a leaf image and get a simulated disease pre
 
 ## 🧩 Source Code
 
-[💻 **View HTML Source on GitHub**](https://github.com/nileshteli/crop_disease_detection/tree/main/templates)
+[💻 **View HTML Source on GitHub**](https://github.com/nileshteli/crop_disease_detection/tree/main/templates/dataset.html)
 
 
 ## 🚀 Features
@@ -25,5 +25,3 @@ This project allows users to upload a leaf image and get a simulated disease pre
   - 🌽 Corn
   - 🥔 Potato
 - 🧠 Fully client-side demo — no backend or ML model required
-
----
