@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Classifier</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; color: white; margin-bottom: 30px; }
+        .header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .header p { font-size: 1.1rem; opacity: 0.9; }
+        .card { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .upload-area { border: 3px dashed #667eea; border-radius: 10px; padding: 40px; text-align: center; margin-bottom: 20px; transition: all 0.3s; }
+        .upload-area:hover { border-color: #764ba2; background: #f8f9ff; }
+        .upload-area.dragover { border-color: #4CAF50; background: #f0fff0; }
+        .file-input { display: none; }
+        .upload-btn { background: #667eea; color: white; padding: 12px 24px; border: none; border-radius: 25px; cursor: pointer; font-size: 16px; transition: all 0.3s; }
+        .upload-btn:hover { background: #764ba2; transform: translateY(-2px); }
+        .preview { display: none; text-align: center; margin: 20px 0; }
+        .preview img { max-width: 300px; max-height: 300px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .classify-btn { background: #4CAF50; color: white; padding: 12px 30px; border: none; border-radius: 25px; cursor: pointer; font-size: 16px; margin-top: 15px; transition: all 0.3s; }
+        .classify-btn:hover { background: #45a049; transform: translateY(-2px); }
+        .classify-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+        .result { margin-top: 20px; padding: 20px; border-radius: 10px; text-align: center; display: none; }
+        .result.success { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .result.error { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        .loading { display: none; text-align: center; margin: 20px 0; }
+        .spinner { border: 3px solid #f3f3f3; border-top: 3px solid #667eea; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .supported-crops { margin-top: 30px; }
+        .supported-crops h3 { color: #333; margin-bottom: 15px; }
+        .crop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+        .crop-item { background: #f8f9ff; padding: 8px; border-radius: 8px; text-align: center; font-size: 14px; color: #555; cursor: pointer; transition: all 0.3s; }
+        .crop-item:hover { background: #667eea; color: white; transform: translateY(-2px); }
+        .disease-item { margin: 5px 0; padding: 8px; border-radius: 5px; }
+        .disease-healthy { background: #d4edda; color: #155724; }
+        .disease-sick { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌱 Plant Disease Classifier</h1>
+            <p>Upload a plant image to detect diseases using AI</p>
+        </div>
+        
+        <div class="card">
+            <div class="upload-area" id="uploadArea">
+                <p style="margin-bottom: 15px; color: #666;">Drag and drop an image here or</p>
+                <button class="upload-btn" onclick="document.getElementById('fileInput').click()">Choose File</button>
+                <input type="file" id="fileInput" class="file-input" accept="image/*">
+                <p style="margin-top: 10px; font-size: 14px; color: #999;">Supported: JPG, JPEG, PNG</p>
+            </div>
+            
+            <div class="preview" id="preview">
+                <img id="previewImg" alt="Preview">
+                <br>
+                <button class="classify-btn" id="classifyBtn">Classify Disease</button>
+            </div>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Analyzing image...</p>
+            </div>
+            
+            <div class="result" id="result"></div>
+            
+            <div class="supported-crops">
+                <h3>Browse Diseases by Plant</h3>
+                <div class="crop-grid">
+                    <div class="crop-item" onclick="showDiseases('Apple')">Apple</div>
+                    <div class="crop-item" onclick="showDiseases('Blueberry')">Blueberry</div>
+                    <div class="crop-item" onclick="showDiseases('Cherry')">Cherry</div>
+                    <div class="crop-item" onclick="showDiseases('Corn')">Corn</div>
+                    <div class="crop-item" onclick="showDiseases('Grape')">Grape</div>
+                    <div class="crop-item" onclick="showDiseases('Orange')">Orange</div>
+                    <div class="crop-item" onclick="showDiseases('Peach')">Peach</div>
+                    <div class="crop-item" onclick="showDiseases('Pepper')">Pepper</div>
+                    <div class="crop-item" onclick="showDiseases('Potato')">Potato</div>
+                    <div class="crop-item" onclick="showDiseases('Raspberry')">Raspberry</div>
+                    <div class="crop-item" onclick="showDiseases('Soybean')">Soybean</div>
+                    <div class="crop-item" onclick="showDiseases('Squash')">Squash</div>
+                    <div class="crop-item" onclick="showDiseases('Strawberry')">Strawberry</div>
+                    <div class="crop-item" onclick="showDiseases('Tomato')">Tomato</div>
+                </div>
+                
+                <div id="diseaseInfo" style="display: none; margin-top: 20px; padding: 15px; background: #f8f9ff; border-radius: 8px;">
+                    <h4 id="plantName"></h4>
+                    <div id="diseaseList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const uploadArea = document.getElementById('uploadArea');
+        const preview = document.getElementById('preview');
+        const previewImg = document.getElementById('previewImg');
+        const classifyBtn = document.getElementById('classifyBtn');
+        const loading = document.getElementById('loading');
+        const result = document.getElementById('result');
+
+        // Plant disease data
+        const plantDiseases = {
+            'Apple': ['Apple scab', 'Black rot', 'Cedar apple rust', 'Healthy'],
+            'Blueberry': ['Healthy'],
+            'Cherry': ['Powdery mildew', 'Healthy'],
+            'Corn': ['Cercospora leaf spot', 'Common rust', 'Northern Leaf Blight', 'Healthy'],
+            'Grape': ['Black rot', 'Esca (Black Measles)', 'Leaf blight', 'Healthy'],
+            'Orange': ['Haunglongbing (Citrus greening)'],
+            'Peach': ['Bacterial spot', 'Healthy'],
+            'Pepper': ['Bacterial spot', 'Healthy'],
+            'Potato': ['Early blight', 'Late blight', 'Healthy'],
+            'Raspberry': ['Healthy'],
+            'Soybean': ['Healthy'],
+            'Squash': ['Powdery mildew'],
+            'Strawberry': ['Leaf scorch', 'Healthy'],
+            'Tomato': ['Bacterial spot', 'Early blight', 'Late blight', 'Leaf Mold', 'Septoria leaf spot', 'Spider mites', 'Target Spot', 'Yellow Leaf Curl Virus', 'Mosaic virus', 'Healthy']
+        };
+
+        function showDiseases(plant) {
+            const diseaseInfo = document.getElementById('diseaseInfo');
+            const plantName = document.getElementById('plantName');
+            const diseaseList = document.getElementById('diseaseList');
+            
+            plantName.textContent = `${plant} Diseases:`;
+            diseaseList.innerHTML = '';
+            
+            plantDiseases[plant].forEach(disease => {
+                const diseaseDiv = document.createElement('div');
+                diseaseDiv.className = disease === 'Healthy' ? 'disease-item disease-healthy' : 'disease-item disease-sick';
+                diseaseDiv.textContent = disease === 'Healthy' ? '✅ ' + disease : '🦠 ' + disease;
+                diseaseList.appendChild(diseaseDiv);
+            });
+            
+            diseaseInfo.style.display = 'block';
+        }
+
+        // Drag and drop functionality
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) {
+                showResult('Please select a valid image file.', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewImg.src = e.target.result;
+                preview.style.display = 'block';
+                result.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        classifyBtn.addEventListener('click', () => {
+            classifyImage();
+        });
+
+        async function classifyImage() {
+            loading.style.display = 'block';
+            classifyBtn.disabled = true;
+            result.style.display = 'none';
+
+            // Simulate API call (replace with actual Streamlit app endpoint)
+            try {
+                await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate processing
+                
+                // Mock prediction result
+                const diseases = [
+                    'Apple___healthy', 'Tomato___Early_blight', 'Potato___Late_blight',
+                    'Corn_(maize)___healthy', 'Grape___Black_rot', 'Strawberry___Leaf_scorch'
+                ];
+                const prediction = diseases[Math.floor(Math.random() * diseases.length)];
+                
+                showResult(`Prediction: ${formatDiseaseName(prediction)}`, 'success');
+            } catch (error) {
+                showResult('Error classifying image. Please try again.', 'error');
+            } finally {
+                loading.style.display = 'none';
+                classifyBtn.disabled = false;
+            }
+        }
+
+        function formatDiseaseName(prediction) {
+            return prediction.replace(/___/g, ' - ').replace(/_/g, ' ');
+        }
+
+        function showResult(message, type) {
+            result.textContent = message;
+            result.className = `result ${type}`;
+            result.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
