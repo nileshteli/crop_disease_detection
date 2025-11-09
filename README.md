@@ -11,7 +11,8 @@ This project allows users to upload a leaf image and get a simulated disease pre
 
 ## 🧩 Source Code
 
-[💻 **View HTML Source on GitHub**](https://github.com/nileshteli/crop_disease_detection/tree/main/templates/dataset.html)
+[💻 **View HTML Source on GitHub**](https://github.com/nileshteli/crop_disease_detection/tree/main/templates
+)
 
 
 ## 🚀 Features
