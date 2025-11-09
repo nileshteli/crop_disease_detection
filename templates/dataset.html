@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dataset Information</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1000px; margin: 0 auto; padding: 20px; }
+        .crop-section { background: #f8f9fa; margin: 15px 0; padding: 15px; border-radius: 5px; }
+        .disease { background: #fff; margin: 5px 0; padding: 10px; border-left: 4px solid #007bff; }
+        .healthy { border-left-color: #28a745; }
+        .nav { margin: 20px 0; }
+        .nav a { color: #007bff; text-decoration: none; margin-right: 20px; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">← Back to Detection</a>
+    </div>
+    
+    <h1>📊 Dataset Information</h1>
+    <p><strong>Source:</strong> PlantVillage Dataset from Kaggle</p>
+    <p><strong>Total Classes:</strong> 38 (including healthy plants)</p>
+    <p><strong>Model:</strong> CNN trained on 224x224 images</p>
+    
+    <h2>🌾 Supported Crops & Diseases:</h2>
+    
+    <div class="crop-section">
+        <h3>🍎 Apple (4 classes)</h3>
+        <div class="disease">Apple Scab - Fungal disease causing dark, scaly lesions</div>
+        <div class="disease">Black Rot - Causes black, circular spots on fruit and leaves</div>
+        <div class="disease">Cedar Apple Rust - Orange spots on leaves, requires cedar trees nearby</div>
+        <div class="disease healthy">Healthy Apple</div>
+    </div>
+    
+    <div class="crop-section">
+        <h3>🌽 Corn/Maize (4 classes)</h3>
+        <div class="disease">Cercospora Leaf Spot - Gray rectangular spots with dark borders</div>
+        <div class="disease">Common Rust - Small, circular to oval rust pustules</div>
+        <div class="disease">Northern Leaf Blight - Long, elliptical lesions</div>
+        <div class="disease healthy">Healthy Corn</div>
+    </div>
+    
+    <div class="crop-section">
+        <h3>🍅 Tomato (10 classes)</h3>
+        <div class="disease">Bacterial Spot - Small, dark spots with yellow halos</div>
+        <div class="disease">Early Blight - Dark spots with concentric rings</div>
+        <div class="disease">Late Blight - Water-soaked lesions that turn brown</div>
+        <div class="disease">Leaf Mold - Yellow spots on upper leaf surface</div>
+        <div class="disease">Septoria Leaf Spot - Small, circular spots with dark borders</div>
+        <div class="disease">Spider Mites - Stippling and webbing on leaves</div>
+        <div class="disease">Target Spot - Circular spots with concentric rings</div>
+        <div class="disease">Yellow Leaf Curl Virus - Yellowing and curling of leaves</div>
+        <div class="disease">Mosaic Virus - Mottled yellow and green patterns</div>
+        <div class="disease healthy">Healthy Tomato</div>
+    </div>
+    
+    <div class="crop-section">
+        <h3>🥔 Potato (3 classes)</h3>
+        <div class="disease">Early Blight - Dark brown spots with concentric rings</div>
+        <div class="disease">Late Blight - Dark, water-soaked lesions</div>
+        <div class="disease healthy">Healthy Potato</div>
+    </div>
+    
+    <div class="crop-section">
+        <h3>🍇 Grape (4 classes)</h3>
+        <div class="disease">Black Rot - Circular brown spots on leaves</div>
+        <div class="disease">Esca (Black Measles) - Tiger stripe pattern on leaves</div>
+        <div class="disease">Leaf Blight - Brown spots with yellow halos</div>
+        <div class="disease healthy">Healthy Grape</div>
+    </div>
+    
+    <div class="crop-section">
+        <h3>🫐 Other Crops</h3>
+        <div class="disease healthy">Blueberry - Healthy</div>
+        <div class="disease">Cherry - Powdery Mildew</div>
+        <div class="disease healthy">Cherry - Healthy</div>
+        <div class="disease">Orange - Huanglongbing (Citrus Greening)</div>
+        <div class="disease">Peach - Bacterial Spot</div>
+        <div class="disease healthy">Peach - Healthy</div>
+        <div class="disease">Bell Pepper - Bacterial Spot</div>
+        <div class="disease healthy">Bell Pepper - Healthy</div>
+        <div class="disease healthy">Raspberry - Healthy</div>
+        <div class="disease healthy">Soybean - Healthy</div>
+        <div class="disease">Squash - Powdery Mildew</div>
+        <div class="disease">Strawberry - Leaf Scorch</div>
+        <div class="disease healthy">Strawberry - Healthy</div>
+    </div>
+    
+    <h2>📈 Model Performance</h2>
+    <p>The CNN model was trained using deep learning techniques with data augmentation to improve generalization across different lighting conditions and image qualities.</p>
+    
+    <h2>🔗 Resources</h2>
+    <ul>
+        <li><a href="https://www.kaggle.com/datasets/abdallahalidev/plantvillage-dataset" target="_blank">Original Dataset on Kaggle</a></li>
+        <li><a href="https://drive.google.com/file/d/1rKh-IElSdHTqax7XdfSdZTn-r8T_qWPf/view?usp=drive_link" target="_blank">Pre-trained Model</a></li>
+    </ul>
+</body>
+</html>
