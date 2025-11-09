@@ -21,6 +21,7 @@ This project allows users to upload a leaf image and get a simulated disease pre
     </div>
   </a>
 </div>
+
 ## 🚀 Features
 
 - 📁 Upload any plant leaf image (JPG/PNG)
