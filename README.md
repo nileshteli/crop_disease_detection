@@ -5,22 +5,14 @@ This project allows users to upload a leaf image and get a simulated disease pre
 
 ---
 
-<div align="center">
-  <a href="https://github.com/nileshteli/crop_disease_detection/blob/main/templates/index.html" target="_blank" style="text-decoration:none;">
-    <div style="
-      display:inline-block;
-      padding: 20px 30px;
-      background: #007bff;
-      color: white;
-      border-radius: 10px;
-      font-size: 18px;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      transition: 0.3s;
-    "
-    </div>
-  </a>
-</div>
+## 🌐 Live Demo
+
+[🚀 **Open Crop Disease Detection Webpage**](https://nileshteli.github.io/crop_disease_detection/templates/index.html)
+
+## 🧩 Source Code
+
+[💻 **View HTML Source on GitHub**](https://github.com/nileshteli/crop_disease_detection/tree/main/templates)
+
 
 ## 🚀 Features
 
