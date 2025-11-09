@@ -6,7 +6,7 @@ This project allows users to upload a leaf image and get a simulated disease pre
 ---
 
 <div align="center">
-  <a href="" target="_blank" style="text-decoration:none;">
+  <a href="https://github.com/nileshteli/crop_disease_detection/blob/main/templates/index.html" target="_blank" style="text-decoration:none;">
     <div style="
       display:inline-block;
       padding: 20px 30px;
