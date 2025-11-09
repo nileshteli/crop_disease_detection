@@ -17,8 +17,7 @@ This project allows users to upload a leaf image and get a simulated disease pre
       font-weight: bold;
       box-shadow: 0 4px 10px rgba(0,0,0,0.15);
       transition: 0.3s;
-    ">
-      🚀 **Open Live Demo**
+    "
     </div>
   </a>
 </div>
